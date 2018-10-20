@@ -10,6 +10,11 @@ int *p2=memory;
 
 int tosearch(int n,int freesize){
 	
+	if(memory[n]){
+		//printf("Allocated\n");
+	}
+	else{
+	
 	for(i=memorysize-2;i>150;i=i-3){
 		if((freesize<memory[i])&&(memory[i-1]==1)){  //(freesize<memory[i])&&(memory[i-1]==1)
 			printf("%d\n",memory[i+1]);
@@ -31,6 +36,8 @@ int tosearch(int n,int freesize){
 		
 	}
 	
+	
+	}
 	return n;
 }
 
