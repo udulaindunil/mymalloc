@@ -1,4 +1,3 @@
-
 #include<stdio.h>
 #define memorysize 200
 int memory[memorysize];
@@ -16,7 +15,7 @@ int tosearch(int n,int freesize){
 	else{
 	
 	for(i=memorysize-2;i>150;i=i-3){
-		if((freesize<memory[i])&&(memory[i-1]==1)){  //(freesize<memory[i])&&(memory[i-1]==1)
+		if((freesize<memory[i])&&(memory[i-1]==1)){  
 			printf("%d\n",memory[i+1]);
 			memory[i]=freesize;
 			memory[i-1]=2;
@@ -30,13 +29,9 @@ int tosearch(int n,int freesize){
 			memory[top--]=freesize;
 			memory[top--]=2;
 			
-			break;
-			
-		}
-		
+			break;			
+		}		
 	}
-	
-	
 	}
 	return n;
 }
@@ -56,28 +51,20 @@ int * write(int n,int m,int x){
 		return &memory[n];
 	
 		}	
-		
-}
+		}
 
 
 
 void myfree(int n){
-	//printf(">..>>>%d<<<<< \n",searchingindex);	
+		
 	int v;
 	while(memory[searchingindex]){
-		//	printf(">%d<<<<< \n",memory[searchingindex]);	
-
 		if(memory[searchingindex]==n){
 			v=memory[--searchingindex];
-		//	printf(" v = %d\n",v);
 			searchingindex--;
-			//printf(">>>>%d<<<<< \n",memory[searchingindex]);
 			memory[searchingindex]=1;	
-
 			break;
-			
-		}
-		
+			}
 		searchingindex--;
 	}
 	
@@ -86,15 +73,6 @@ void myfree(int n){
 	}
 	searchingindex=memorysize-1;
 }
-
-
-
-
-
-
-
-
-
 
 
 void bulid(){
@@ -110,8 +88,4 @@ void display(){
 		
 		}
 }
-
-//void write(int n,int m){
-//	p=memory[n];
-//}
 
