@@ -6,19 +6,17 @@ void main(){
 //	//int p;
 //	printf("Yes udula u can\n");
 //	printf("%d",add(19,91));
-	int *x;
+	int *x,*y,*z,*p,*t;
 	bulid();
-	x=write(5,10,1000);
-	
-	//myfree(5);
-	
-	write(20,8,555);
-	myfree(20);
-	
-	write(30,10,3333);
-	myfree(30);
+	x=write(1,10,3333);
+	y=write(1,4,4444);
+	p=write(12,3,5555);
+	*x++=30;
 
-	write(35,5,9999);
+	
+	
+
+
 	
 	
 	display();

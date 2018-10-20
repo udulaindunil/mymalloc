@@ -1,10 +1,6 @@
-//int total =0;
-//int add(int a,int b){
-//	total= a+b;
-//	return total;
-//}
+
 #include<stdio.h>
-#define memorysize 100
+#define memorysize 200
 int memory[memorysize];
 int i;
 int *p;
@@ -12,23 +8,51 @@ int top=memorysize-1;
 int searchingindex=memorysize-1;
 int *p2=memory;
 
-int * write(int n,int m,int x){
-	if(!memory[n]){
+int tosearch(int n,int freesize){
 	
-		p=&memory[n];
-		for(i=n;i<n+m;i++){
+	for(i=memorysize-2;i>150;i=i-3){
+		if((freesize<memory[i])&&(memory[i-1]==1)){  //(freesize<memory[i])&&(memory[i-1]==1)
+			printf("%d\n",memory[i+1]);
+			memory[i]=freesize;
+			memory[i-1]=2;
+			
+			return memory[i+1];	
+		
+								
+		}
+		else if(memory[i]==0){
+			memory[top--]=n;
+			memory[top--]=freesize;
+			memory[top--]=2;
+			
+			break;
+			
+		}
+		
+	}
+	
+	return n;
+}
+
+int * write(int n,int m,int x){
+		int h;
+		h=tosearch(n,m);
+		if(memory[h]){
+			printf("Memory allocated\n");
+		}
+		else{
+			p=&memory[h];
+			for(i=n;i<n+m;i++){
 			*p++=x;
 			}
-		memory[top--]=n;
-		memory[top--]=m;
-		memory[top--]=2;
-	
+
 		return &memory[n];
-	}
-	else{
-		printf("Memory already allowcated\n");
-	}
+	
+		}	
+		
 }
+
+
 
 void myfree(int n){
 	//printf(">..>>>%d<<<<< \n",searchingindex);	
@@ -53,7 +77,7 @@ void myfree(int n){
 	for(i=n;i<n+v;i++){
 		memory[i]=00;
 	}
-	searchingindex=49;
+	searchingindex=memorysize-1;
 }
 
 
