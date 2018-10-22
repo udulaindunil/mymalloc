@@ -3,13 +3,19 @@
 #include"add.h"
 
 void main(){
-
+	int lastvalue;
 	int *x,*y,*z,*p,*t;
+		
 	bulid();
-	x=write(1,10,3333);
-	y=write(1,4,4444);
-	p=write(12,3,5555);
-	*x++=30;
+	x=write(10,3333);
+	y=write(4,4444);
+	p=write(13,5555);
+//	myfree(11);	
+//	t=write(3,1111);
+//	myfree(11);
+//	y=write(2,7777);
+//	
+	
 
 	display();
 
