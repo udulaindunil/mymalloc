@@ -3,20 +3,16 @@
 #include"add.h"
 
 void main(){
-	char *x,*y,*z,*p,*t;
-		
-	//bulid();
-	x=write(10,'a');
-	y=write(4,'b');
-	p=write(13,'c');
-	myfree(11);	
-	printf(">>>%c\n\n",*x);
-//	t=write(3,1111);
-//	myfree(11);
-//	y=write(20,7777);
-//	
+	char *x,*y,*z,*p,*t,*b,*k,*r;
 	
-
+	x=write(3,'A');
+	y=write(7,'B');
+	z=write(5,'C');
+	myfree(4);
+	p=write(5,'Z');
+	t=write(1,'U');
+	r=write(15,'i');
+	
 	display();
 
 }

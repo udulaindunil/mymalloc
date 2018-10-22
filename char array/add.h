@@ -1,23 +1,41 @@
 #include<stdio.h>
 #define memorysize 200
 char memory[memorysize];
-int i;
+int i=1;
 char *p;
 int top=memorysize-1;
 int searchingindex=memorysize-1;
 char *p2=memory;
 int space;
+int j;
 
-int setvalue(){
-	i=1;
-	int temp1=0;
-	while(!memory[i]==NULL){
+int setvalue(int size){
+	
+	while(!(memory[i]==NULL)){
 		
 		i++;
 		
 	}
-	temp1=i;
-	return temp1;
+	j=i;
+	while(memory[j]==NULL){
+		j++;
+	}
+	space=j-i;
+	if(space>size){
+		return i;
+	}
+	else{
+		//printf("j == %d %c  \n",j,(char)memory[j+5]);
+		if(memory[j]){
+			i=j;
+			return setvalue(size);
+		}
+		else{
+			return j;
+		}
+		
+	}
+	
 }
 
 
@@ -54,12 +72,12 @@ int tosearch(int n,int freesize){
 
 char * write(int m,char x){
 		int asci=(int)x;
-		int n=setvalue();
+		int n=setvalue(m);
 			//printf("The space valiu is %d \n",space);
 			
 		int h;
 		h=tosearch(n,m);
-		printf(">>>>%d\n",h);
+	//	printf(">>>>%d\n",h);
 		if(memory[h]==79){
 			printf("Memory allocated\n");
 		}
@@ -88,7 +106,7 @@ void myfree(int n){
 	}
 	
 	for(i=n;i<n+v;i++){
-		memory[i]=(char)79;
+		memory[i]=NULL;//(char)45;
 	}
 	searchingindex=memorysize-1;
 }
@@ -102,10 +120,19 @@ void bulid(){
 }
 
 void display(){
-	int p = setvalue();
-	for(i=0;i<p;i++){
-		printf("%c\t",memory[i]);
-		
+	//int p = setvalue();
+	int j=1;
+	for(i=0;i<memorysize;i++){
+		if(i<150){
+		printf("%c\t",memory[i]);	
+		}
+		else{
+		//printf("\n");
+		while(memory[memorysize-j]){
+			printf("%d \t",(int)memory[memorysize-j]);
+			j++;
+		}
+		}		
 		}
 }
 
