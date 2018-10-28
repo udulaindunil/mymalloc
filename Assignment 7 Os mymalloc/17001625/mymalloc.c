@@ -106,7 +106,7 @@ void Display(void* x){
 	char *p=(char*)x;
 	char* status="Allocated";
 	printf("Allocated Address\t\t Status\t\t Allocated Size(bytes) \t\t Return Address\n");
-	printf("%p \t\t %c--%s \t\t %d \t\t\t %p\n\n",p,*p,status,*(int*)(p+1),p+metasize);
+	printf("%p \t\t %c--%s \t\t %d \t\t\t %p\n\n",p,*(char*)(p-metasize),status,*(int*)(p-sizeof(int)),p);
 }
 
 
