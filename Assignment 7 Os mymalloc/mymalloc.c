@@ -1,8 +1,18 @@
 #include<stdio.h>
+#include<unistd.h>
 #define memorysize 25000
 char memory[memorysize]={'\0'};
 
 int metasize=sizeof(char)+sizeof(int);
+
+void *MyMalloc(int size);
+void MyFree(void* x);
+char *allocate(int size);
+void initialize();
+void reshedule();
+void display(void *p1);
+void memoryReport();
+
 
 void reshedule(){
 	char *nextslot;
@@ -12,13 +22,13 @@ void reshedule(){
 	
 	while(*nextslot){
 		
-	if((*nextslot=='f')&&(*(char*)(nextslot+*(int*)(nextslot+1)+metasize)=='f')){
-		*(int*)(nextslot+1)=*(int*)(nextslot+1)+metasize+*(int*)(nextslot+*(int*)(nextslot+1)+metasize+1);
+		if((*nextslot=='f')&&(*(char*)(nextslot+*(int*)(nextslot+1)+metasize)=='f')){
+			*(int*)(nextslot+1)=*(int*)(nextslot+1)+metasize+*(int*)(nextslot+*(int*)(nextslot+1)+metasize+1);
 		
-		nextslot=memory;
-	}
-	si=*(int*)(nextslot+1);
-	nextslot=nextslot+si+metasize;
+			nextslot=memory;
+		}
+		si=*(int*)(nextslot+1);
+		nextslot=nextslot+si+metasize;
 	}	
 }
 
@@ -27,7 +37,6 @@ void MyFree(void* p){
 	*(x-(sizeof(int)+sizeof(char)))='f';
 	reshedule();
 }
-
 
 void initialize(){
 	*memory='f';
@@ -40,19 +49,17 @@ char *allocate(int size){
 	if(size<memorysize-1){
 			while(size<memorysize-1){ 
 				st_size = *(int*)(ptr2+1);
-
 				if((st_size>=size)&&(*ptr2=='f')){
-					
-					//rebuilding
-					if(st_size==size){
-						return (ptr2);	
-					}
-					else{
+					if((st_size>=size+(metasize+1))&&(*ptr2=='f')){
+						*ptr2='a';
+						*(int*)(ptr2+1)=size;
 						*(ptr2+metasize+size)='f';
 						*(int*)(ptr2+metasize+size+1)=st_size-(size+metasize);
 						return (ptr2);
-					}
-					
+					}else{
+						*ptr2='a';
+						return (ptr2);
+					}					
 				}
 				else if(ptr2+st_size+size+metasize >=memory+(memorysize-1)){
 						printf("Sorry! No Enough Memory...\n");
@@ -68,7 +75,6 @@ char *allocate(int size){
 	else{
 		printf("Sorry! No Enough Memory...\n");
 		return NULL;
-		
 	}
 }
 
@@ -85,12 +91,8 @@ void *MyMalloc(int size){
 		if(!*memory){
 			initialize();	
 			}    
-			
 		ptr=allocate(size); //this gives suatable pinter to allocate
-		*ptr='a';
-		*(int*)(ptr+1)=size;
 		display(ptr);
-		
 	return (void*)ptr+metasize;
 	}else{
 		printf("Invalid memory size .Can't Allocate'\n");
